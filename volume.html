@@ -1,0 +1,53 @@
+<script type="text/x-red" data-template-name="volume">
+  <div class="form-row">
+    <label for="node-input-volume"> Volume</label>
+    <input type="text" id="node-input-volume" placeholder="50"/>
+  </div>
+  <div class="form-row" id="slider" style="width: 70%; display: bloxk; margin: auto;"></div>
+  <br/>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="volume">
+  <p>Set your volume</p>
+  <p>Only works with linux and osx</p>
+  <p>You can override the volume settings with <b>msg.volume</b></p>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType("volume", {
+    category: "basic",
+    defaults: {
+      name: { value: "" },
+      volume: { value: "" }
+    },
+    color: "#fff",
+    inputs: 1,
+    outputs: 1,
+    icon: "sound.png",
+    align: "right",
+    label: function() {
+      return this.name || this.volume || "volume";
+    },
+    labelStyle: function() {
+      return this.name ? "node_label_italic" : "";
+    },
+    oneditprepare: function() {
+      var slider = $("#slider");
+      var volume = $("#node-input-volume");
+      slider.slider({
+        create: function(ev, ui) {
+          slider.slider("value", volume.val());
+        },
+        min: 0,
+        max: 100,
+        slide: function(ev, ui) {
+          volume.val(ui.value);
+        }
+      });
+    }
+  });
+</script>
