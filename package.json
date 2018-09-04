@@ -13,6 +13,6 @@
     "volume"
   ],
   "dependencies": {
-    "ttbd-exec": "TheThingBox/ttbd-exec#f9d47d8"
+    "ttbd-exec": "TheThingBox/ttbd-exec#8595423"
   }
 }
